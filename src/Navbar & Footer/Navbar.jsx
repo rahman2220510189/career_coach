@@ -1,127 +1,469 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
     { name: "Home", path: "/", icon: "🏠" },
-    { name: "About Us", path: "/about", icon: "👥" },
+    
     { name: "Dashboard", path: "/dashboard", icon: "⚡", badge: "AI" },
     { name: "Mock Interview", path: "/interview", icon: "🎤" },
+    { name: "CV Builder", path: "/cv-builder", icon: "📝" },
+    { name: "About Us", path: "/about", icon: "👥" },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#06060d] border-t border-purple-500/15">
-      <div className="max-w-7xl  mx-auto px-6 h-[64px] flex items-center justify-between">
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap');
 
-        {/* Logo */}
-         <div className="md:col-span-1">
-            <Link to="/" className="flex items-center gap-2.5 w-fit">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-sm">
-                🎯
-              </div>
-              <span className="text-base font-medium text-gray-100">
-                Career<span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Coach</span>
-              </span>
-            </Link>
+        .nav-root {
+          font-family: 'DM Sans', sans-serif;
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-root.scrolled .nav-inner {
+          background: rgba(6, 6, 13, 0.85);
+          backdrop-filter: blur(20px) saturate(180%);
+          -webkit-backdrop-filter: blur(20px) saturate(180%);
+          border-bottom: 1px solid rgba(139, 92, 246, 0.12);
+          box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 1px 0 rgba(139,92,246,0.08);
+        }
+
+        .nav-inner {
+          background: rgba(6, 6, 13, 0.95);
+          border-bottom: 1px solid rgba(255,255,255,0.04);
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 24px;
+          height: 64px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 32px;
+        }
+
+        /* ─── LOGO ─── */
+        .logo-link {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+          flex-shrink: 0;
+        }
+
+        .logo-icon-wrap {
+          width: 34px;
+          height: 34px;
+          border-radius: 10px;
+          background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 16px;
+          flex-shrink: 0;
+          box-shadow: 0 0 0 1px rgba(139,92,246,0.3), 0 4px 12px rgba(139,92,246,0.25);
+          transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .logo-link:hover .logo-icon-wrap {
+          transform: rotate(-6deg) scale(1.05);
+          box-shadow: 0 0 0 1px rgba(139,92,246,0.5), 0 4px 20px rgba(139,92,246,0.4);
+        }
+
+        .logo-text {
+          font-family: 'Syne', sans-serif;
+          font-size: 17px;
+          font-weight: 600;
+          color: #f0f0f5;
+          letter-spacing: -0.3px;
+        }
+
+        .logo-text span {
+          background: linear-gradient(90deg, #a78bfa, #22d3ee);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        /* ─── DESKTOP NAV ─── */
+        .desktop-links {
+          display: none;
+          align-items: center;
+          gap: 2px;
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 100px;
+          padding: 4px;
+        }
+
+        @media (min-width: 768px) {
+          .desktop-links { display: flex; }
+        }
+
+        .nav-link-item {
+          position: relative;
+        }
+
+        .nav-link {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 7px 14px;
+          border-radius: 100px;
+          font-size: 13.5px;
+          font-weight: 400;
+          letter-spacing: 0.1px;
+          text-decoration: none;
+          color: rgba(255,255,255,0.45);
+          transition: all 0.2s ease;
+          white-space: nowrap;
+        }
+
+        .nav-link:hover {
+          color: rgba(255,255,255,0.9);
+          background: rgba(255,255,255,0.06);
+        }
+
+        .nav-link.active {
+          color: #ffffff;
+          background: rgba(255,255,255,0.1);
+          border: 1px solid rgba(255,255,255,0.1);
+          font-weight: 500;
+        }
+
+        .nav-icon {
+          font-size: 12px;
+          opacity: 0.8;
+        }
+
+        .nav-badge {
+          font-size: 8.5px;
+          font-weight: 600;
+          padding: 2px 5px;
+          border-radius: 100px;
+          background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+          color: #fff;
+          letter-spacing: 0.5px;
+        }
+
+        .dot-indicator {
+          position: absolute;
+          bottom: -1px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 3px;
+          height: 3px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.5);
+          opacity: 0;
+          transition: opacity 0.2s ease;
+        }
+
+        .nav-link-item:hover .dot-indicator {
+          opacity: 1;
+        }
+
+        /* ─── RIGHT BUTTONS ─── */
+        .right-buttons {
+          display: none;
+          align-items: center;
+          gap: 6px;
+          flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+          .right-buttons { display: flex; }
+        }
+
+        .btn-login {
+          padding: 8px 16px;
+          font-size: 13.5px;
+          font-weight: 400;
+          color: rgba(255,255,255,0.35);
+          border-radius: 100px;
+          text-decoration: none;
+          transition: all 0.2s ease;
+          letter-spacing: 0.1px;
+        }
+
+        .btn-login:hover {
+          color: rgba(255,255,255,0.85);
+          background: rgba(255,255,255,0.06);
+        }
+
+        .btn-cta {
+          position: relative;
+          overflow: hidden;
+          padding: 8px 18px;
+          font-size: 13.5px;
+          font-weight: 500;
+          color: #000;
+          background: #ffffff;
+          border-radius: 100px;
+          text-decoration: none;
+          letter-spacing: 0.1px;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .btn-cta::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(6,182,212,0.15));
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          border-radius: inherit;
+        }
+
+        .btn-cta:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 16px rgba(255,255,255,0.15), 0 0 0 1px rgba(255,255,255,0.1);
+        }
+
+        .btn-cta:hover::before {
+          opacity: 1;
+        }
+
+        /* ─── HAMBURGER ─── */
+        .hamburger {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 38px;
+          height: 38px;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 10px;
+          color: rgba(255,255,255,0.5);
+          cursor: pointer;
+          transition: all 0.2s ease;
+          font-size: 15px;
+        }
+
+        .hamburger:hover {
+          background: rgba(255,255,255,0.09);
+          color: rgba(255,255,255,0.9);
+          border-color: rgba(255,255,255,0.15);
+        }
+
+        @media (min-width: 768px) {
+          .hamburger { display: none; }
+        }
+
+        /* ─── MOBILE MENU ─── */
+        .mobile-menu {
+          border-top: 1px solid rgba(255,255,255,0.05);
+          background: rgba(5,5,10,0.98);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          padding: 12px 16px 16px;
+          animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideDown {
+          from { opacity: 0; transform: translateY(-8px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .mobile-links {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+
+        .mobile-link {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 11px 14px;
+          border-radius: 12px;
+          font-size: 14px;
+          font-weight: 400;
+          text-decoration: none;
+          color: rgba(255,255,255,0.35);
+          transition: all 0.18s ease;
+        }
+
+        .mobile-link:hover {
+          color: rgba(255,255,255,0.85);
+          background: rgba(255,255,255,0.06);
+        }
+
+        .mobile-link.active {
+          color: #fff;
+          background: rgba(255,255,255,0.09);
+          border: 1px solid rgba(255,255,255,0.09);
+        }
+
+        .mobile-icon {
+          font-size: 13px;
+          opacity: 0.7;
+          width: 18px;
+          text-align: center;
+        }
+
+        .mobile-actions {
+          display: flex;
+          gap: 8px;
+          margin-top: 12px;
+          padding-top: 12px;
+          border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .mobile-btn-login {
+          flex: 1;
+          text-align: center;
+          padding: 10px;
+          font-size: 13.5px;
+          font-weight: 400;
+          color: rgba(255,255,255,0.35);
+          border-radius: 100px;
+          text-decoration: none;
+          border: 1px solid rgba(255,255,255,0.07);
+          transition: all 0.2s ease;
+        }
+
+        .mobile-btn-login:hover {
+          color: rgba(255,255,255,0.8);
+          background: rgba(255,255,255,0.06);
+        }
+
+        .mobile-btn-cta {
+          flex: 1;
+          text-align: center;
+          padding: 10px;
+          font-size: 13.5px;
+          font-weight: 500;
+          color: #000;
+          background: #ffffff;
+          border-radius: 100px;
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+
+        .mobile-btn-cta:hover {
+          background: rgba(255,255,255,0.88);
+        }
+      `}</style>
+
+      <nav className={`nav-root${scrolled ? " scrolled" : ""}`}>
+        <div className="nav-inner">
+          <div className="nav-container">
+
+            {/* Logo */}
+            <div className="md:col-span-1">
+              <Link to="/" className="logo-link">
+                <div className="logo-icon-wrap">
+                  🎯
+                </div>
+                <span className="logo-text">
+                  Career<span>Coach</span>
+                </span>
+              </Link>
+            </div>
+
+            {/* Desktop Links */}
+            <ul className="desktop-links" style={{ listStyle: "none", margin: 0, padding: "4px" }}>
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.path;
+                return (
+                  <li key={link.name} className="nav-link-item">
+                    <Link
+                      to={link.path}
+                      className={`nav-link${isActive ? " active" : ""}`}
+                    >
+                      <span className="nav-icon">{link.icon}</span>
+                      {link.name}
+                      {link.badge && (
+                        <span className="nav-badge">
+                          {link.badge}
+                        </span>
+                      )}
+                    </Link>
+
+                    {/* Dot hover indicator */}
+                    {!isActive && (
+                      <span className="dot-indicator" />
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+
+            {/* Right Buttons */}
+            <div className="right-buttons">
+              <Link to="/login" className="btn-login">
+                Log in
+              </Link>
+              <Link to="/signup" className="btn-cta">
+                Get Started →
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="hamburger"
+            >
+              {isOpen ? "✕" : "☰"}
+            </button>
           </div>
+        </div>
 
-        {/* Desktop Links */}
-        <ul className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => {
-            const isActive = location.pathname === link.path;
-            return (
-              <li key={link.name} className="relative group">
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div className="mobile-menu">
+            <div className="mobile-links">
+              {navLinks.map((link) => (
                 <Link
+                  key={link.name}
                   to={link.path}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-all duration-200
-                    ${isActive
-                      ? "text-white bg-white/10 border border-white/10"
-                      : "text-white/60 hover:text-white hover:bg-white/6"
-                    }`}
+                  onClick={() => setIsOpen(false)}
+                  className={`mobile-link${location.pathname === link.path ? " active" : ""}`}
                 >
-                  <span className="text-[13px]">{link.icon}</span>
+                  <span className="mobile-icon">{link.icon}</span>
                   {link.name}
-                  {link.badge && (
-                    <span className="text-[9px] font-medium px-1.5 py-0.5 rounded-full bg-white text-black">
-                      {link.badge}
-                    </span>
-                  )}
                 </Link>
-
-                {/* Dot hover indicator */}
-                {!isActive && (
-                  <span className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                )}
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* Right Buttons */}
-        <div className="hidden md:flex items-center gap-2">
-          <Link
-            to="/login"
-            className="px-4 py-2 text-sm text-white/40 hover:text-white hover:bg-white/6 rounded-full transition-all duration-200"
-          >
-            Log in
-          </Link>
-          <Link
-            to="/signup"
-            className="px-4 py-2 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 hover:-translate-y-0.5 transition-all duration-200"
-          >
-            Get Started →
-          </Link>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 text-white/40 hover:text-white transition-colors"
-        >
-          {isOpen ? "✕" : "☰"}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-[#050508] border-t border-white/5 px-6 py-4 flex flex-col gap-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              onClick={() => setIsOpen(false)}
-              className={`flex items-center gap-2.5 px-4 py-2.5 rounded-full text-sm transition-all
-                ${location.pathname === link.path
-                  ? "text-white bg-white/10 border border-white/10"
-                  : "text-white/40 hover:text-white hover:bg-white/6"
-                }`}
-            >
-              <span className="text-[13px]">{link.icon}</span>
-              {link.name}
-            </Link>
-          ))}
-          <div className="flex gap-2 mt-3 pt-3 border-t border-white/5">
-            <Link
-              to="/login"
-              onClick={() => setIsOpen(false)}
-              className="flex-1 text-center py-2 text-sm text-white/40 hover:text-white rounded-full hover:bg-white/6 transition-all"
-            >
-              Log in
-            </Link>
-            <Link
-              to="/signup"
-              onClick={() => setIsOpen(false)}
-              className="flex-1 text-center py-2 text-sm font-medium text-black bg-white rounded-full"
-            >
-              Get Started →
-            </Link>
+              ))}
+            </div>
+            <div className="mobile-actions">
+              <Link
+                to="/login"
+                onClick={() => setIsOpen(false)}
+                className="mobile-btn-login"
+              >
+                Log in
+              </Link>
+              <Link
+                to="/signup"
+                onClick={() => setIsOpen(false)}
+                className="mobile-btn-cta"
+              >
+                Get Started →
+              </Link>
+            </div>
           </div>
-        </div>
-      )}
-    </nav>
+        )}
+      </nav>
+    </>
   );
 };
 

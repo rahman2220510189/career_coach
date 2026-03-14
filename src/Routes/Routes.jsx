@@ -9,6 +9,7 @@ import Interview from "../pages/Interview";
 import Admin from "../pages/Admin";
 import { useAuth } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
+import CVBuilder from "../pages/CVBuilder";
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
@@ -45,6 +46,9 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+   
+   { path: "/cv-builder",
+    element: (<ProtectedRoute><CVBuilder /></ProtectedRoute>), },
       {
         path: "/admin",
         element: (

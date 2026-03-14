@@ -12,9 +12,11 @@ import { AuthProvider } from './context/AuthContext';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-  <AuthProvider>
+ <div className='bg-neutral-950'>
+   <AuthProvider>
     <RouterProvider router={router} />
     </AuthProvider>
+ </div>
    
    </StrictMode>
 )
