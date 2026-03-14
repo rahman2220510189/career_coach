@@ -110,17 +110,18 @@ const CVBuilder = () => {
     setLoading(true);
     setGenerateError("");
     try {
+      // Only send education entries where institution is actually filled
       const educationPayload = educationList
-        .filter((e) => e.institution?.trim() || e.degree?.trim())
+        .filter((e) => e.institution?.trim())
         .map((e) => ({
           degree: e.degree,
-          institution: e.institution,
-          ...(e.board && { board: e.board }),
-          ...(e.gpa && { gpa: e.gpa }),
-          ...(e.cgpa && { cgpa: e.cgpa }),
-          ...(e.department && { department: e.department }),
-          ...(e.duration && { duration: e.duration }),
-          year: e.year,
+          institution: e.institution.trim(),
+          ...(e.board?.trim() && { board: e.board.trim() }),
+          ...(e.gpa?.trim() && { gpa: e.gpa.trim() }),
+          ...(e.cgpa?.trim() && { cgpa: e.cgpa.trim() }),
+          ...(e.department?.trim() && { department: e.department.trim() }),
+          ...(e.duration?.trim() && { duration: e.duration.trim() }),
+          ...(e.year?.trim() && { year: e.year.trim() }),
         }));
 
       const res = await instance.post("/cv/generate", {
@@ -149,17 +150,31 @@ const CVBuilder = () => {
 
   // ── Styles ────────────────────────────────────────────
   const inputCls = "w-full bg-[#06060d] border border-white/[0.08] rounded-xl px-4 py-2.5 text-sm text-white/80 placeholder:text-white/15 focus:outline-none focus:border-purple-500/40 focus:bg-purple-500/[0.03] transition-all";
-  const labelCls = "text-xs text-white/30 mb-1.5 block tracking-wide";
+  const labelCls = "text-xs text-white/55 mb-1.5 block tracking-wide font-medium";
   const cardCls = "bg-white/[0.03] border border-white/[0.07] rounded-2xl p-5 sm:p-6 mb-4 hover:border-white/[0.11] transition-colors duration-300";
-  const sectionTitle = "text-[10.5px] font-semibold tracking-[0.9px] uppercase text-white/25 mb-4 flex items-center gap-1.5";
+  const sectionTitle = "text-[10.5px] font-semibold tracking-[0.9px] uppercase text-white/50 mb-4 flex items-center gap-1.5";
 
   return (
     <>
       <style>{`
         @media print {
-          body { background: #fff !important; }
+          @page {
+            margin: 0.5cm;
+            size: A4;
+          }
+          * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
           .no-print { display: none !important; }
-          .print-area { background: #fff !important; border-radius: 0 !important; box-shadow: none !important; }
+          .print-area {
+            background: #fff !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            border: none !important;
+            margin: 0 !important;
+            padding: 24px !important;
+          }
+          /* Hide browser default header/footer */
+          html { margin: 0; }
         }
       `}</style>
 
@@ -747,8 +762,8 @@ const CVBuilder = () => {
               </div>
 
               {/* CV Preview */}
-              <div className="bg-white text-black rounded-2xl p-8 mb-4 print-area">
-                <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">
+              <div id="cv-print-area" className="bg-white text-black rounded-2xl p-8 mb-4 print-area">
+                <h1 className="text-[22px] font-bold text-gray-950 tracking-tight">
                   {generatedCV.personalInfo?.name}
                 </h1>
                 <p className="text-xs text-gray-500 mt-1">
@@ -764,7 +779,7 @@ const CVBuilder = () => {
 
                 {generatedCV.summary && (
                   <>
-                    <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gray-400 mb-2">Professional Summary</p>
+                    <p className="text-[9.5px] font-bold tracking-[1.8px] uppercase text-gray-500 mb-2 pb-1 border-b border-gray-100">Professional Summary</p>
                     <p className="text-xs text-gray-600 leading-relaxed">{generatedCV.summary}</p>
                     <hr className="border-gray-200 my-4" />
                   </>
@@ -772,7 +787,7 @@ const CVBuilder = () => {
 
                 {generatedCV.experience?.length > 0 && (
                   <>
-                    <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gray-400 mb-3">Work Experience</p>
+                    <p className="text-[9.5px] font-bold tracking-[1.8px] uppercase text-gray-500 mb-3 pb-1 border-b border-gray-100">Work Experience</p>
                     {generatedCV.experience.map((exp, i) => (
                       <div key={i} className="mb-4">
                         <div className="flex justify-between items-baseline">
@@ -791,7 +806,7 @@ const CVBuilder = () => {
 
                 {generatedCV.education?.length > 0 && (
                   <>
-                    <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gray-400 mb-3">Education</p>
+                    <p className="text-[9.5px] font-bold tracking-[1.8px] uppercase text-gray-500 mb-3 pb-1 border-b border-gray-100">Education</p>
                     {generatedCV.education.map((edu, i) => (
                       <div key={i} className="mb-2">
                         <div className="flex justify-between">
@@ -811,35 +826,48 @@ const CVBuilder = () => {
                   </>
                 )}
 
-                {(generatedCV.skills?.technical?.length > 0 || generatedCV.skills?.soft?.length > 0) && (
-                  <>
-                    {generatedCV.skills?.technical?.length > 0 && (
-                      <>
-                        <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gray-400 mb-2">Technical Skills</p>
-                        <div className="flex flex-wrap gap-1 mb-3">
-                          {generatedCV.skills.technical.map((s, i) => (
-                            <span key={i} className="text-xs text-gray-600 bg-gray-100 border border-gray-200 px-2 py-0.5 rounded">{s}</span>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                    {generatedCV.skills?.soft?.length > 0 && (
-                      <>
-                        <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gray-400 mb-2">Soft Skills</p>
-                        <div className="flex flex-wrap gap-1 mb-3">
-                          {generatedCV.skills.soft.map((s, i) => (
-                            <span key={i} className="text-xs text-gray-600 bg-gray-100 border border-gray-200 px-2 py-0.5 rounded">{s}</span>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                    <hr className="border-gray-200 my-4" />
-                  </>
-                )}
+                {(() => {
+                  // Deduplicate: use user-entered skills as source of truth
+                  // Always use user-entered skills — AI may truncate them
+                  const userTech = skills.technical.length > 0
+                    ? skills.technical
+                    : (generatedCV.skills?.technical || []);
+                  const userSoft = skills.soft.length > 0
+                    ? skills.soft
+                    : (generatedCV.skills?.soft?.length > 0
+                        ? generatedCV.skills.soft
+                        : ["Problem Solving", "Team Collaboration", "Communication", "Time Management", "Adaptability"]);
+                  if (!userTech.length && !userSoft.length) return null;
+                  return (
+                    <>
+                      {userTech.length > 0 && (
+                        <>
+                          <p className="text-[9.5px] font-bold tracking-[1.8px] uppercase text-gray-500 mb-2 pb-1 border-b border-gray-100">Technical Skills</p>
+                          <div className="flex flex-wrap gap-1 mb-3">
+                            {userTech.map((s, i) => (
+                              <span key={i} className="text-xs text-gray-700 bg-gray-100 border border-gray-200 px-2 py-0.5 rounded">{s}</span>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                      {userSoft.length > 0 && (
+                        <>
+                          <p className="text-[9.5px] font-bold tracking-[1.8px] uppercase text-gray-500 mb-2 pb-1 border-b border-gray-100">Soft Skills</p>
+                          <div className="flex flex-wrap gap-1 mb-3">
+                            {userSoft.map((s, i) => (
+                              <span key={i} className="text-xs text-gray-700 bg-gray-100 border border-gray-200 px-2 py-0.5 rounded">{s}</span>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                      <hr className="border-gray-200 my-4" />
+                    </>
+                  );
+                })()}
 
                 {generatedCV.projects?.length > 0 && (
                   <>
-                    <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gray-400 mb-3">Projects</p>
+                    <p className="text-[9.5px] font-bold tracking-[1.8px] uppercase text-gray-500 mb-3 pb-1 border-b border-gray-100">Projects</p>
                     {generatedCV.projects.map((proj, i) => (
                       <div key={i} className="mb-3">
                         <div className="flex justify-between">
@@ -860,7 +888,7 @@ const CVBuilder = () => {
 
                 {generatedCV.certificates?.length > 0 && (
                   <>
-                    <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gray-400 mb-2">Certificates</p>
+                    <p className="text-[9.5px] font-bold tracking-[1.8px] uppercase text-gray-500 mb-2 pb-1 border-b border-gray-100">Certificates</p>
                     {generatedCV.certificates.map((cert, i) => (
                       <p key={i} className="text-xs text-gray-600 mb-1">
                         <span className="font-medium text-gray-800">{cert.name}</span>
@@ -874,10 +902,10 @@ const CVBuilder = () => {
 
                 {generatedCV.languages?.length > 0 && (
                   <>
-                    <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gray-400 mb-2">Languages</p>
+                    <p className="text-[9.5px] font-bold tracking-[1.8px] uppercase text-gray-500 mb-2 pb-1 border-b border-gray-100">Languages</p>
                     <div className="flex flex-wrap gap-2 mb-3">
                       {generatedCV.languages.map((lang, i) => (
-                        <span key={i} className="text-xs text-gray-600 bg-gray-100 border border-gray-200 px-2 py-0.5 rounded">
+                        <span key={i} className="text-xs text-gray-700 bg-gray-50 border border-gray-300 px-2 py-0.5 rounded font-medium">
                           {lang.language}{lang.level ? ` — ${lang.level}` : ""}
                         </span>
                       ))}
@@ -888,7 +916,7 @@ const CVBuilder = () => {
 
                 {generatedCV.volunteer?.length > 0 && (
                   <>
-                    <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gray-400 mb-3">Volunteer Experience</p>
+                    <p className="text-[9.5px] font-bold tracking-[1.8px] uppercase text-gray-500 mb-3 pb-1 border-b border-gray-100">Volunteer Experience</p>
                     {generatedCV.volunteer.map((vol, i) => (
                       <div key={i} className="mb-2">
                         <div className="flex justify-between">
@@ -905,7 +933,7 @@ const CVBuilder = () => {
 
                 {generatedCV.awards?.length > 0 && (
                   <>
-                    <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gray-400 mb-2">Awards & Achievements</p>
+                    <p className="text-[9.5px] font-bold tracking-[1.8px] uppercase text-gray-500 mb-2 pb-1 border-b border-gray-100">Awards & Achievements</p>
                     {generatedCV.awards.map((award, i) => (
                       <p key={i} className="text-xs text-gray-600 mb-1">
                         <span className="font-medium text-gray-800">{award.title}</span>
@@ -919,7 +947,7 @@ const CVBuilder = () => {
 
                 {generatedCV.references?.length > 0 && (
                   <>
-                    <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-gray-400 mb-3">References</p>
+                    <p className="text-[9.5px] font-bold tracking-[1.8px] uppercase text-gray-500 mb-3 pb-1 border-b border-gray-100">References</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {generatedCV.references.map((ref, i) => (
                         <div key={i}>
@@ -935,10 +963,109 @@ const CVBuilder = () => {
               </div>
 
               <button
-                onClick={() => window.print()}
+                onClick={() => {
+                  // Open a clean print window with only the CV content
+                  const cvHtml = document.getElementById("cv-print-area")?.innerHTML;
+                  if (!cvHtml) return;
+                  const win = window.open("", "_blank");
+                  win.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                      <head>
+                        <meta charset="utf-8"/>
+                        <title>CV - ${generatedCV.personalInfo?.name || "My CV"}</title>
+                        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+                        <style>
+                          * { margin: 0; padding: 0; box-sizing: border-box; }
+                          @page { size: A4; margin: 1.2cm 1.5cm; }
+                          body { font-family: 'DM Sans', Arial, sans-serif; font-size: 12px; color: #111; background: #fff; }
+                          h1 { font-size: 22px; font-weight: 700; color: #111; margin-bottom: 4px; }
+                          hr { border: none; border-top: 1px solid #e5e7eb; margin: 12px 0; }
+                          .section-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #9ca3af; margin-bottom: 8px; }
+                          .contact { font-size: 11px; color: #6b7280; margin-bottom: 4px; }
+                          .summary { font-size: 11px; color: #4b5563; line-height: 1.6; }
+                          .edu-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+                          .edu-title { font-size: 12px; font-weight: 600; color: #111; }
+                          .edu-year { font-size: 10px; color: #9ca3af; }
+                          .edu-sub { font-size: 11px; color: #6b7280; margin-bottom: 8px; }
+                          .tag { display: inline-block; font-size: 10px; color: #374151; background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 4px; padding: 2px 8px; margin: 3px 4px 3px 0; white-space: nowrap; }
+                          .proj-title { font-size: 12px; font-weight: 600; color: #111; }
+                          .proj-link { font-size: 10px; color: #3b82f6; }
+                          .proj-desc { font-size: 11px; color: #4b5563; margin: 3px 0; line-height: 1.5; }
+                          .cert-line { font-size: 11px; color: #4b5563; margin-bottom: 3px; }
+                          .bullet { font-size: 11px; color: #4b5563; padding-left: 12px; position: relative; margin-top: 3px; line-height: 1.5; }
+                          .bullet::before { content: "•"; position: absolute; left: 0; color: #9ca3af; }
+                          .exp-role { font-size: 12px; font-weight: 600; color: #111; }
+                          .exp-dur { font-size: 10px; color: #9ca3af; }
+                          .exp-company { font-size: 11px; color: #6b7280; margin-bottom: 3px; }
+                          .ref-name { font-size: 12px; font-weight: 600; color: #111; }
+                          .ref-sub { font-size: 11px; color: #6b7280; }
+                          .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+                          .proj-header { display: flex; justify-content: space-between; align-items: baseline; }
+                          /* Fix Tailwind classes in print */
+                          .flex { display: flex; }
+                          .flex-wrap { flex-wrap: wrap; }
+                          .gap-1 > * { margin: 2px; }
+                          .gap-2 > * { margin: 3px; }
+                          .rounded { border-radius: 4px; }
+                          .font-medium { font-weight: 500; }
+                          .font-semibold { font-weight: 600; }
+                          .font-bold { font-weight: 700; }
+                          .text-gray-950, .text-black { color: #030712; }
+                          .text-gray-900 { color: #111827; }
+                          .text-gray-700 { color: #374151; }
+                          .text-gray-600 { color: #4b5563; }
+                          .text-gray-500 { color: #6b7280; }
+                          .text-gray-400 { color: #9ca3af; }
+                          .text-blue-500 { color: #3b82f6; }
+                          .bg-gray-50 { background: #f9fafb; }
+                          .bg-gray-100 { background: #f3f4f6; }
+                          .border { border-width: 1px; border-style: solid; }
+                          .border-gray-100 { border-color: #f3f4f6; }
+                          .border-gray-200 { border-color: #e5e7eb; }
+                          .border-gray-300 { border-color: #d1d5db; }
+                          .border-b { border-bottom-width: 1px; border-bottom-style: solid; }
+                          .pb-1 { padding-bottom: 4px; }
+                          .mb-1 { margin-bottom: 4px; }
+                          .mb-2 { margin-bottom: 8px; }
+                          .mb-3 { margin-bottom: 12px; }
+                          .mb-4 { margin-bottom: 16px; }
+                          .mt-1 { margin-top: 4px; }
+                          .my-4 { margin-top: 16px; margin-bottom: 16px; }
+                          .px-2 { padding-left: 8px; padding-right: 8px; }
+                          .py-0\.5 { padding-top: 2px; padding-bottom: 2px; }
+                          .pl-3 { padding-left: 12px; }
+                          .p-8 { padding: 0; }
+                          .grid { display: grid; }
+                          .grid-cols-2 { grid-template-columns: 1fr 1fr; }
+                          .gap-3 { gap: 12px; }
+                          .text-xs { font-size: 11px; }
+                          .text-sm { font-size: 12px; }
+                          .text-2xl { font-size: 22px; }
+                          .\[22px\] { font-size: 22px; }
+                          .tracking-tight { letter-spacing: -0.025em; }
+                          .tracking-\[1\.5px\], .tracking-\[1\.8px\] { letter-spacing: 1.5px; }
+                          .uppercase { text-transform: uppercase; }
+                          .leading-relaxed { line-height: 1.6; }
+                          .justify-between { justify-content: space-between; }
+                          .items-baseline { align-items: baseline; }
+                          .relative { position: relative; }
+                          .absolute { position: absolute; }
+                          .left-0 { left: 0; }
+                          .before\:content-\[\'•\'\]::before { content: "•"; position: absolute; left: 0; color: #9ca3af; }
+                          hr { border: none; border-top: 1px solid #e5e7eb; margin: 12px 0; }
+                          .exp-header { display: flex; justify-content: space-between; align-items: baseline; }
+                        </style>
+                      </head>
+                      <body>${cvHtml}</body>
+                      <script>window.onload = () => { window.print(); window.onafterprint = () => window.close(); }<\/script>
+                    </html>
+                  `);
+                  win.document.close();
+                }}
                 className="relative overflow-hidden w-full py-3.5 rounded-xl text-sm font-medium text-white bg-white/[0.05] border border-white/[0.09] hover:border-purple-500/30 hover:bg-purple-500/[0.05] transition-all mb-3 no-print"
               >
-                <span className="relative z-10">⬇ Download PDF (Ctrl+P → Save as PDF)</span>
+                <span className="relative z-10">⬇ Save as PDF</span>
               </button>
 
               <div className="flex gap-3 no-print">
