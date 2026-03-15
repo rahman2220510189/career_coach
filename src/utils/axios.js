@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://career-coach-backend-system.onrender.com/api",
+  // baseURL: "https://career-coach-backend-system.onrender.com/api",
+  baseURL: "http://localhost:5000/api",
 });
 
 // Add token to every request automatically

@@ -45,16 +45,16 @@ const Navbar = () => {
         }
 
         .nav-root.scrolled .nav-inner {
-          background: rgba(6, 6, 13, 0.85);
+          background: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(20px) saturate(180%);
           -webkit-backdrop-filter: blur(20px) saturate(180%);
-          border-bottom: 1px solid rgba(139, 92, 246, 0.12);
-          box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 1px 0 rgba(139,92,246,0.08);
+          border-bottom: 1px solid rgba(139, 92, 246, 0.18);
+          box-shadow: 0 4px 24px rgba(139,92,246,0.08), 0 1px 0 rgba(139,92,246,0.1);
         }
 
         .nav-inner {
-          background: rgba(6, 6, 13, 0.95);
-          border-bottom: 1px solid rgba(255,255,255,0.04);
+          background: rgba(255, 255, 255, 0.98);
+          border-bottom: 1px solid rgba(0,0,0,0.07);
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -100,12 +100,12 @@ const Navbar = () => {
           font-family: 'Syne', sans-serif;
           font-size: 17px;
           font-weight: 600;
-          color: #f0f0f5;
+          color: #1a1a2e;
           letter-spacing: -0.3px;
         }
 
         .logo-text span {
-          background: linear-gradient(90deg, #a78bfa, #22d3ee);
+          background: linear-gradient(90deg, #7c3aed, #0891b2);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -115,8 +115,8 @@ const Navbar = () => {
           display: none;
           align-items: center;
           gap: 2px;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: rgba(0,0,0,0.03);
+          border: 1px solid rgba(0,0,0,0.07);
           border-radius: 100px;
           padding: 4px;
         }
@@ -134,32 +134,35 @@ const Navbar = () => {
           padding: 7px 14px;
           border-radius: 100px;
           font-size: 13.5px;
-          font-weight: 400;
+          font-weight: 500;
           letter-spacing: 0.1px;
           text-decoration: none;
-          color: rgba(255,255,255,0.45);
+          color: #1a1a2e;
           transition: all 0.2s ease;
           white-space: nowrap;
         }
 
-        .nav-link:hover { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.06); }
+        .nav-link:hover {
+          color: #5b21b6;
+          background: rgba(139,92,246,0.07);
+        }
 
         .nav-link.active {
-          color: #ffffff;
-          background: rgba(255,255,255,0.1);
-          border: 1px solid rgba(255,255,255,0.1);
-          font-weight: 500;
+          color: #5b21b6;
+          background: rgba(139,92,246,0.1);
+          border: 1px solid rgba(139,92,246,0.18);
+          font-weight: 700;
         }
 
         .nav-link.admin-link {
-          color: #a78bfa;
-          background: rgba(139,92,246,0.1);
-          border: 1px solid rgba(139,92,246,0.2);
+          color: #7c3aed;
+          background: rgba(139,92,246,0.08);
+          border: 1px solid rgba(139,92,246,0.18);
         }
 
         .nav-link.admin-link:hover {
-          background: rgba(139,92,246,0.18);
-          color: #c4b5fd;
+          background: rgba(139,92,246,0.14);
+          color: #5b21b6;
         }
 
         .nav-icon { font-size: 12px; opacity: 0.8; }
@@ -182,7 +185,7 @@ const Navbar = () => {
           width: 3px;
           height: 3px;
           border-radius: 50%;
-          background: rgba(255,255,255,0.5);
+          background: rgba(139,92,246,0.5);
           opacity: 0;
           transition: opacity 0.2s ease;
         }
@@ -203,15 +206,16 @@ const Navbar = () => {
         .btn-login {
           padding: 8px 16px;
           font-size: 13.5px;
-          color: rgba(255,255,255,0.35);
+          color: #1a1a2e;
+          font-weight: 500;
           border-radius: 100px;
           text-decoration: none;
           transition: all 0.2s ease;
         }
 
         .btn-login:hover {
-          color: rgba(255,255,255,0.85);
-          background: rgba(255,255,255,0.06);
+          color: #5b21b6;
+          background: rgba(139,92,246,0.07);
         }
 
         .btn-cta {
@@ -220,17 +224,17 @@ const Navbar = () => {
           padding: 8px 18px;
           font-size: 13.5px;
           font-weight: 500;
-          color: #000;
-          background: #ffffff;
+          color: #fff;
+          background: linear-gradient(135deg, #7c3aed, #0891b2);
           border-radius: 100px;
           text-decoration: none;
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+          box-shadow: 0 2px 10px rgba(139,92,246,0.3);
         }
 
         .btn-cta:hover {
           transform: translateY(-1px);
-          box-shadow: 0 4px 16px rgba(255,255,255,0.15);
+          box-shadow: 0 4px 18px rgba(139,92,246,0.4);
         }
 
         /* User Avatar */
@@ -240,8 +244,8 @@ const Navbar = () => {
           gap: 8px;
           padding: 5px 12px 5px 6px;
           border-radius: 100px;
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: rgba(139,92,246,0.06);
+          border: 1px solid rgba(139,92,246,0.15);
           cursor: default;
         }
 
@@ -261,7 +265,8 @@ const Navbar = () => {
 
         .avatar-name {
           font-size: 13px;
-          color: rgba(255,255,255,0.6);
+          color: #1a1a2e;
+          font-weight: 500;
           max-width: 80px;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -271,9 +276,9 @@ const Navbar = () => {
         .btn-logout {
           padding: 8px 14px;
           font-size: 13px;
-          color: rgba(255,255,255,0.3);
+          color: #1a1a2e;
           border-radius: 100px;
-          border: 1px solid rgba(255,255,255,0.07);
+          border: 1px solid rgba(0,0,0,0.12);
           background: transparent;
           cursor: pointer;
           transition: all 0.2s ease;
@@ -281,9 +286,9 @@ const Navbar = () => {
         }
 
         .btn-logout:hover {
-          color: #f87171;
-          border-color: rgba(248,113,113,0.3);
-          background: rgba(248,113,113,0.06);
+          color: #dc2626;
+          border-color: rgba(220,38,38,0.3);
+          background: rgba(220,38,38,0.05);
         }
 
         .hamburger {
@@ -292,18 +297,19 @@ const Navbar = () => {
           justify-content: center;
           width: 38px;
           height: 38px;
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: rgba(0,0,0,0.04);
+          border: 1px solid rgba(0,0,0,0.09);
           border-radius: 10px;
-          color: rgba(255,255,255,0.5);
+          color: rgba(30,30,60,0.55);
           cursor: pointer;
           transition: all 0.2s ease;
           font-size: 15px;
         }
 
         .hamburger:hover {
-          background: rgba(255,255,255,0.09);
-          color: rgba(255,255,255,0.9);
+          background: rgba(139,92,246,0.08);
+          color: #5b21b6;
+          border-color: rgba(139,92,246,0.2);
         }
 
         @media (min-width: 768px) {
@@ -311,11 +317,12 @@ const Navbar = () => {
         }
 
         .mobile-menu {
-          border-top: 1px solid rgba(255,255,255,0.05);
-          background: rgba(5,5,10,0.98);
+          border-top: 1px solid rgba(0,0,0,0.07);
+          background: rgba(255, 255, 255, 0.99);
           backdrop-filter: blur(20px);
           padding: 12px 16px 16px;
           animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
 
         @keyframes slideDown {
@@ -337,25 +344,27 @@ const Navbar = () => {
           border-radius: 12px;
           font-size: 14px;
           text-decoration: none;
-          color: rgba(255,255,255,0.35);
+          color: #1a1a2e;
+          font-weight: 500;
           transition: all 0.18s ease;
         }
 
         .mobile-link:hover {
-          color: rgba(255,255,255,0.85);
-          background: rgba(255,255,255,0.06);
+          color: #5b21b6;
+          background: rgba(139,92,246,0.06);
         }
 
         .mobile-link.active {
-          color: #fff;
-          background: rgba(255,255,255,0.09);
-          border: 1px solid rgba(255,255,255,0.09);
+          color: #5b21b6;
+          background: rgba(139,92,246,0.09);
+          border: 1px solid rgba(139,92,246,0.15);
+          font-weight: 600;
         }
 
         .mobile-link.admin-mobile {
-          color: #a78bfa;
-          background: rgba(139,92,246,0.08);
-          border: 1px solid rgba(139,92,246,0.15);
+          color: #7c3aed;
+          background: rgba(139,92,246,0.07);
+          border: 1px solid rgba(139,92,246,0.14);
         }
 
         .mobile-icon { font-size: 13px; opacity: 0.7; width: 18px; text-align: center; }
@@ -365,7 +374,7 @@ const Navbar = () => {
           gap: 8px;
           margin-top: 12px;
           padding-top: 12px;
-          border-top: 1px solid rgba(255,255,255,0.05);
+          border-top: 1px solid rgba(0,0,0,0.07);
         }
 
         .mobile-user-info {
@@ -374,8 +383,8 @@ const Navbar = () => {
           gap: 10px;
           padding: 10px 14px;
           margin-bottom: 8px;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: rgba(139,92,246,0.04);
+          border: 1px solid rgba(139,92,246,0.12);
           border-radius: 12px;
         }
 
@@ -384,16 +393,17 @@ const Navbar = () => {
           text-align: center;
           padding: 10px;
           font-size: 13.5px;
-          color: rgba(255,255,255,0.35);
+          font-weight: 500;
+          color: #1a1a2e;
           border-radius: 100px;
           text-decoration: none;
-          border: 1px solid rgba(255,255,255,0.07);
+          border: 1px solid rgba(0,0,0,0.12);
           transition: all 0.2s ease;
         }
 
         .mobile-btn-login:hover {
-          color: rgba(255,255,255,0.8);
-          background: rgba(255,255,255,0.06);
+          color: #5b21b6;
+          background: rgba(139,92,246,0.06);
         }
 
         .mobile-btn-cta {
@@ -402,10 +412,11 @@ const Navbar = () => {
           padding: 10px;
           font-size: 13.5px;
           font-weight: 500;
-          color: #000;
-          background: #ffffff;
+          color: #fff;
+          background: linear-gradient(135deg, #7c3aed, #0891b2);
           border-radius: 100px;
           text-decoration: none;
+          box-shadow: 0 2px 10px rgba(139,92,246,0.25);
           transition: all 0.2s ease;
         }
 
@@ -414,10 +425,10 @@ const Navbar = () => {
           text-align: center;
           padding: 10px;
           font-size: 13.5px;
-          color: #f87171;
+          color: #dc2626;
           border-radius: 100px;
-          border: 1px solid rgba(248,113,113,0.2);
-          background: rgba(248,113,113,0.06);
+          border: 1px solid rgba(220,38,38,0.2);
+          background: rgba(220,38,38,0.05);
           cursor: pointer;
           font-family: 'DM Sans', sans-serif;
           transition: all 0.2s ease;
@@ -497,11 +508,11 @@ const Navbar = () => {
                   {user.name?.charAt(0).toUpperCase()}
                 </div>
                 <div>
-                  <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.7)", fontWeight: 500 }}>{user.name}</p>
-                  <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.25)", marginTop: "2px" }}>{user.email}</p>
+                  <p style={{ fontSize: "13px", color: "rgba(20,20,50,0.8)", fontWeight: 500 }}>{user.name}</p>
+                  <p style={{ fontSize: "11px", color: "rgba(20,20,50,0.4)", marginTop: "2px" }}>{user.email}</p>
                 </div>
                 {user.role === "admin" && (
-                  <span style={{ marginLeft: "auto", fontSize: "9px", color: "#a78bfa", background: "rgba(139,92,246,0.1)", border: "1px solid rgba(139,92,246,0.2)", padding: "2px 8px", borderRadius: "20px" }}>
+                  <span style={{ marginLeft: "auto", fontSize: "9px", color: "#7c3aed", background: "rgba(139,92,246,0.08)", border: "1px solid rgba(139,92,246,0.18)", padding: "2px 8px", borderRadius: "20px" }}>
                     Admin
                   </span>
                 )}

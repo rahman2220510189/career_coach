@@ -152,10 +152,10 @@ const CVBuilder = () => {
   };
 
   // ── Styles ────────────────────────────────────────────
-  const inputCls = "w-full bg-[#06060d] border border-white/[0.08] rounded-xl px-4 py-2.5 text-sm text-white/80 placeholder:text-white/15 focus:outline-none focus:border-purple-500/40 focus:bg-purple-500/[0.03] transition-all";
-  const labelCls = "text-xs text-white/55 mb-1.5 block tracking-wide font-medium";
-  const cardCls = "bg-white/[0.03] border border-white/[0.07] rounded-2xl p-5 sm:p-6 mb-4 hover:border-white/[0.11] transition-colors duration-300";
-  const sectionTitle = "text-[10.5px] font-semibold tracking-[0.9px] uppercase text-white/50 mb-4 flex items-center gap-1.5";
+  const inputCls = "w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:border-purple-400 focus:bg-purple-50 transition-all";
+  const labelCls = "text-xs text-gray-500 mb-1.5 block tracking-wide font-medium";
+  const cardCls = "bg-white border border-gray-200 rounded-2xl p-5 sm:p-6 mb-4 hover:border-purple-300 hover:shadow-sm transition-all duration-300 shadow-sm";
+  const sectionTitle = "text-[10.5px] font-semibold tracking-[0.9px] uppercase text-gray-400 mb-4 flex items-center gap-1.5";
 
   return (
     <>
@@ -181,29 +181,29 @@ const CVBuilder = () => {
         }
       `}</style>
 
-      <div className="min-h-screen bg-[#06060d]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+      <div className="min-h-screen bg-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
 
-        <div className="pointer-events-none fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[260px] rounded-full bg-purple-600/[0.07] blur-[90px]" />
+        <div className="pointer-events-none fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[260px] rounded-full bg-purple-400/[0.05] blur-[90px]" />
 
         <div className="relative max-w-[760px] mx-auto px-4 sm:px-6 py-10 sm:py-14">
 
           {/* Header */}
           <div className="mb-8 no-print">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.07] mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400" />
-              <p className="text-[10.5px] font-semibold tracking-[0.9px] uppercase text-white/30">AI Powered</p>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-50 border border-purple-200 mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500" />
+              <p className="text-[10.5px] font-semibold tracking-[0.9px] uppercase text-purple-500">AI Powered</p>
             </div>
-            <h1 className="text-2xl sm:text-[28px] font-semibold text-white tracking-[-0.7px]" style={{ fontFamily: "'Syne', sans-serif" }}>
+            <h1 className="text-2xl sm:text-[28px] font-semibold text-gray-900 tracking-[-0.7px]" style={{ fontFamily: "'Syne', sans-serif" }}>
               ATS-Friendly{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">CV Builder</span>
+              <span className="bg-gradient-to-r from-purple-600 to-cyan-600 bg-clip-text text-transparent">CV Builder</span>
             </h1>
-            <p className="text-[13px] text-white/25 mt-2 leading-relaxed">
+            <p className="text-[13px] text-gray-400 mt-2 leading-relaxed">
               Build a CV that gets past ATS systems and lands interviews
             </p>
           </div>
 
           {/* ATS Note */}
-          <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-yellow-500/[0.05] border border-yellow-500/15 text-xs text-yellow-500/50 mb-8 no-print">
+          <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-yellow-50 border border-yellow-200 text-xs text-yellow-600 mb-8 no-print">
             ⚠️ ATS-friendly CVs do not include photos — top companies' ATS systems reject CVs with photos
           </div>
 
@@ -215,21 +215,21 @@ const CVBuilder = () => {
                   <div
                     className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-medium transition-all cursor-pointer
                       ${i < currentStep
-                        ? "bg-gradient-to-br from-purple-500 to-cyan-500 text-white shadow-[0_0_12px_rgba(139,92,246,0.4)]"
+                        ? "bg-gradient-to-br from-purple-500 to-cyan-500 text-white shadow-[0_0_12px_rgba(139,92,246,0.3)]"
                         : i === currentStep
-                        ? "bg-white/10 text-white border border-white/25"
-                        : "bg-white/[0.04] text-white/20 border border-white/[0.08]"
+                        ? "bg-purple-100 text-purple-700 border border-purple-300"
+                        : "bg-gray-100 text-gray-400 border border-gray-200"
                       }`}
                     onClick={() => i < currentStep && setCurrentStep(i)}
                   >
                     {i < currentStep ? "✓" : i + 1}
                   </div>
-                  <span className={`text-[10px] mt-1 whitespace-nowrap transition-colors ${i === currentStep ? "text-white/40" : "text-white/15"}`}>
+                  <span className={`text-[10px] mt-1 whitespace-nowrap transition-colors ${i === currentStep ? "text-gray-500" : "text-gray-300"}`}>
                     {step}
                   </span>
                 </div>
                 {i < STEPS.length - 1 && (
-                  <div className={`w-8 h-[0.5px] mb-4 mx-1 transition-colors duration-500 ${i < currentStep ? "bg-purple-500/40" : "bg-white/[0.07]"}`} />
+                  <div className={`w-8 h-[0.5px] mb-4 mx-1 transition-colors duration-500 ${i < currentStep ? "bg-purple-400" : "bg-gray-200"}`} />
                 )}
               </div>
             ))}
@@ -262,16 +262,16 @@ const CVBuilder = () => {
                 </div>
               </div>
               {/* Optional Job URL */}
-              <div className="bg-white/[0.02] border border-dashed border-purple-500/20 rounded-2xl p-5 sm:p-6 mb-4 hover:border-purple-500/35 transition-colors duration-300">
+              <div className="bg-purple-50 border border-dashed border-purple-300 rounded-2xl p-5 sm:p-6 mb-4 hover:border-purple-400 transition-colors duration-300">
                 <div className="flex items-center gap-2 mb-3">
-                  <p className="text-[10.5px] font-semibold tracking-[0.9px] uppercase text-white/50 flex items-center gap-2">
+                  <p className="text-[10.5px] font-semibold tracking-[0.9px] uppercase text-gray-500 flex items-center gap-2">
                     🎯 Target Job URL
                   </p>
-                  <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                  <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-purple-100 text-purple-600 border border-purple-200">
                     Optional
                   </span>
                 </div>
-                <p className="text-xs text-white/25 mb-3 leading-relaxed">
+                <p className="text-xs text-gray-400 mb-3 leading-relaxed">
                   Paste a job posting URL — AI will tailor your CV to match that role's keywords and requirements automatically.
                 </p>
                 <input
@@ -282,15 +282,15 @@ const CVBuilder = () => {
                   onChange={(e) => setJobUrl(e.target.value)}
                 />
                 {jobUrl.trim() && (
-                  <p className="text-xs text-purple-400/70 mt-2 flex items-center gap-1.5">
+                  <p className="text-xs text-purple-600 mt-2 flex items-center gap-1.5">
                     <span>✓</span> CV will be tailored for this specific job
                   </p>
                 )}
               </div>
 
-              <button onClick={() => setCurrentStep(1)} className="relative overflow-hidden w-full py-3.5 rounded-xl text-sm font-medium text-black bg-white hover:bg-white/90 transition-all group">
+              <button onClick={() => setCurrentStep(1)} className="relative overflow-hidden w-full py-3.5 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-cyan-600 hover:opacity-90 transition-all shadow-md shadow-purple-200 group">
                 <span className="relative z-10">Next: Work Experience →</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </button>
             </div>
           )}
@@ -298,14 +298,14 @@ const CVBuilder = () => {
           {/* ══ STEP 2: Work Experience ══ */}
           {currentStep === 1 && (
             <div>
-              <div className="flex items-center justify-between bg-white/[0.03] border border-white/[0.07] rounded-2xl p-5 mb-4 hover:border-white/[0.11] transition-colors duration-300">
+              <div className="flex items-center justify-between bg-white border border-gray-200 rounded-2xl p-5 mb-4 hover:border-purple-300 transition-colors duration-300 shadow-sm">
                 <div>
-                  <p className="text-sm text-white/60 font-medium">No work experience yet?</p>
-                  <p className="text-xs text-white/25 mt-1">Fresh graduate or student? You can skip this step</p>
+                  <p className="text-sm text-gray-700 font-medium">No work experience yet?</p>
+                  <p className="text-xs text-gray-400 mt-1">Fresh graduate or student? You can skip this step</p>
                 </div>
                 <button
                   onClick={() => setCurrentStep(2)}
-                  className="px-4 py-2 rounded-xl text-xs text-white/30 border border-white/[0.08] hover:text-white/60 hover:border-purple-500/30 transition-all flex-shrink-0"
+                  className="px-4 py-2 rounded-xl text-xs text-gray-500 border border-gray-200 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all flex-shrink-0"
                 >
                   Skip →
                 </button>
@@ -316,7 +316,7 @@ const CVBuilder = () => {
                   <div className="flex items-center justify-between mb-4">
                     <p className={sectionTitle}>💼 Experience {i + 1}</p>
                     {experiences.length > 1 && (
-                      <button onClick={() => removeItem(setExperiences, i)} className="text-xs text-red-400/40 hover:text-red-400 transition-colors">Remove</button>
+                      <button onClick={() => removeItem(setExperiences, i)} className="text-xs text-red-400 hover:text-red-600 transition-colors">Remove</button>
                     )}
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -343,14 +343,14 @@ const CVBuilder = () => {
                 </div>
               ))}
               <button onClick={() => addItem(setExperiences, { company: "", role: "", startDate: "", endDate: "", description: "" })}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-white/30 hover:text-white/60 hover:border-white/15 transition-all mb-4">
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-500 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all mb-4">
                 + Add Another Experience
               </button>
               <div className="flex gap-3">
-                <button onClick={() => setCurrentStep(0)} className="flex-1 py-3.5 rounded-xl text-sm text-white/30 border border-white/[0.08] hover:text-white/50 hover:border-white/15 transition-all">← Back</button>
-                <button onClick={() => setCurrentStep(2)} className="relative overflow-hidden flex-[2] py-3.5 rounded-xl text-sm font-medium text-black bg-white hover:bg-white/90 transition-all group">
+                <button onClick={() => setCurrentStep(0)} className="flex-1 py-3.5 rounded-xl text-sm text-gray-500 border border-gray-200 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all">← Back</button>
+                <button onClick={() => setCurrentStep(2)} className="relative overflow-hidden flex-[2] py-3.5 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-cyan-600 hover:opacity-90 transition-all shadow-md shadow-purple-200 group">
                   <span className="relative z-10">Next: Education →</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </button>
               </div>
             </div>
@@ -366,7 +366,7 @@ const CVBuilder = () => {
                       🎓 {edu.degree || "Education"}{educationList.length > 1 ? ` #${idx + 1}` : ""}
                     </p>
                     {educationList.length > 1 && (
-                      <button onClick={() => removeEducation(edu.id)} className="text-xs text-red-400/40 hover:text-red-400 transition-colors">
+                      <button onClick={() => removeEducation(edu.id)} className="text-xs text-red-400 hover:text-red-600 transition-colors">
                         Remove
                       </button>
                     )}
@@ -442,16 +442,16 @@ const CVBuilder = () => {
               {/* Add degree button */}
               <button
                 onClick={addEducation}
-                className="flex items-center justify-center gap-2 w-full px-4 py-3.5 rounded-2xl bg-white/[0.02] border border-dashed border-white/[0.09] text-sm text-white/30 hover:text-white/60 hover:border-purple-500/30 hover:bg-purple-500/[0.03] transition-all mb-4"
+                className="flex items-center justify-center gap-2 w-full px-4 py-3.5 rounded-2xl bg-purple-50 border border-dashed border-purple-300 text-sm text-gray-500 hover:text-purple-600 hover:border-purple-400 hover:bg-purple-100 transition-all mb-4"
               >
-                + Add Another Degree &nbsp;<span className="text-white/15 text-xs">(MSc, PhD, Diploma…)</span>
+                + Add Another Degree &nbsp;<span className="text-gray-300 text-xs">(MSc, PhD, Diploma…)</span>
               </button>
 
               <div className="flex gap-3">
-                <button onClick={() => setCurrentStep(1)} className="flex-1 py-3.5 rounded-xl text-sm text-white/30 border border-white/[0.08] hover:text-white/50 hover:border-white/15 transition-all">← Back</button>
-                <button onClick={() => setCurrentStep(3)} className="relative overflow-hidden flex-[2] py-3.5 rounded-xl text-sm font-medium text-black bg-white hover:bg-white/90 transition-all group">
+                <button onClick={() => setCurrentStep(1)} className="flex-1 py-3.5 rounded-xl text-sm text-gray-500 border border-gray-200 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all">← Back</button>
+                <button onClick={() => setCurrentStep(3)} className="relative overflow-hidden flex-[2] py-3.5 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-cyan-600 hover:opacity-90 transition-all shadow-md shadow-purple-200 group">
                   <span className="relative z-10">Next: Skills →</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </button>
               </div>
             </div>
@@ -462,14 +462,14 @@ const CVBuilder = () => {
             <div>
               <div className={cardCls}>
                 <p className={sectionTitle}>⚡ Technical Skills</p>
-                <div className="flex flex-wrap gap-2 p-3 bg-[#06060d] border border-white/[0.08] rounded-xl min-h-[48px] mb-2 focus-within:border-purple-500/40 transition-colors">
+                <div className="flex flex-wrap gap-2 p-3 bg-gray-50 border border-gray-200 rounded-xl min-h-[48px] mb-2 focus-within:border-purple-400 transition-colors">
                   {skills.technical.map((tag, i) => (
-                    <span key={i} className="flex items-center gap-1.5 text-xs text-white/50 bg-white/[0.06] border border-white/[0.09] px-3 py-1 rounded-full hover:border-purple-500/20 transition-colors">
+                    <span key={i} className="flex items-center gap-1.5 text-xs text-gray-700 bg-white border border-gray-200 px-3 py-1 rounded-full hover:border-purple-300 transition-colors">
                       {tag}
-                      <button onClick={() => removeTag("technical", i)} className="text-white/20 hover:text-white/60 transition-colors">×</button>
+                      <button onClick={() => removeTag("technical", i)} className="text-gray-400 hover:text-red-500 transition-colors">×</button>
                     </span>
                   ))}
-                  <input className="bg-transparent outline-none text-sm text-white/80 placeholder:text-white/15 min-w-[100px]"
+                  <input className="bg-transparent outline-none text-sm text-gray-700 placeholder:text-gray-300 min-w-[100px]"
                     placeholder="Type a skill, press Enter"
                     value={techInput}
                     onChange={(e) => setTechInput(e.target.value)}
@@ -479,14 +479,14 @@ const CVBuilder = () => {
 
               <div className={cardCls}>
                 <p className={sectionTitle}>🤝 Soft Skills</p>
-                <div className="flex flex-wrap gap-2 p-3 bg-[#06060d] border border-white/[0.08] rounded-xl min-h-[48px] mb-2 focus-within:border-purple-500/40 transition-colors">
+                <div className="flex flex-wrap gap-2 p-3 bg-gray-50 border border-gray-200 rounded-xl min-h-[48px] mb-2 focus-within:border-purple-400 transition-colors">
                   {skills.soft.map((tag, i) => (
-                    <span key={i} className="flex items-center gap-1.5 text-xs text-white/50 bg-white/[0.06] border border-white/[0.09] px-3 py-1 rounded-full hover:border-purple-500/20 transition-colors">
+                    <span key={i} className="flex items-center gap-1.5 text-xs text-gray-700 bg-white border border-gray-200 px-3 py-1 rounded-full hover:border-purple-300 transition-colors">
                       {tag}
-                      <button onClick={() => removeTag("soft", i)} className="text-white/20 hover:text-white/60 transition-colors">×</button>
+                      <button onClick={() => removeTag("soft", i)} className="text-gray-400 hover:text-red-500 transition-colors">×</button>
                     </span>
                   ))}
-                  <input className="bg-transparent outline-none text-sm text-white/80 placeholder:text-white/15 min-w-[100px]"
+                  <input className="bg-transparent outline-none text-sm text-gray-700 placeholder:text-gray-300 min-w-[100px]"
                     placeholder="Type a skill, press Enter"
                     value={softInput}
                     onChange={(e) => setSoftInput(e.target.value)}
@@ -528,7 +528,7 @@ const CVBuilder = () => {
                   </div>
                 ))}
                 <button onClick={() => setSkills({ ...skills, languages: [...skills.languages, { language: "", level: "" }] })}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-xs text-white/30 hover:text-white/60 hover:border-white/15 transition-all">
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-xs text-gray-500 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all">
                   + Add Language
                 </button>
               </div>
@@ -570,16 +570,16 @@ const CVBuilder = () => {
                   </div>
                 ))}
                 <button onClick={() => setSkills({ ...skills, certificates: [...skills.certificates, { name: "", platform: "", year: "" }] })}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-xs text-white/30 hover:text-white/60 hover:border-white/15 transition-all">
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-xs text-gray-500 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all">
                   + Add Certificate
                 </button>
               </div>
 
               <div className="flex gap-3">
-                <button onClick={() => setCurrentStep(2)} className="flex-1 py-3.5 rounded-xl text-sm text-white/30 border border-white/[0.08] hover:text-white/50 hover:border-white/15 transition-all">← Back</button>
-                <button onClick={() => setCurrentStep(4)} className="relative overflow-hidden flex-[2] py-3.5 rounded-xl text-sm font-medium text-black bg-white hover:bg-white/90 transition-all group">
+                <button onClick={() => setCurrentStep(2)} className="flex-1 py-3.5 rounded-xl text-sm text-gray-500 border border-gray-200 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all">← Back</button>
+                <button onClick={() => setCurrentStep(4)} className="relative overflow-hidden flex-[2] py-3.5 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-cyan-600 hover:opacity-90 transition-all shadow-md shadow-purple-200 group">
                   <span className="relative z-10">Next: Projects →</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </button>
               </div>
             </div>
@@ -593,7 +593,7 @@ const CVBuilder = () => {
                   <div className="flex items-center justify-between mb-4">
                     <p className={sectionTitle}>🚀 Project {i + 1}</p>
                     {projects.length > 1 && (
-                      <button onClick={() => removeItem(setProjects, i)} className="text-xs text-red-400/40 hover:text-red-400 transition-colors">Remove</button>
+                      <button onClick={() => removeItem(setProjects, i)} className="text-xs text-red-400 hover:text-red-600 transition-colors">Remove</button>
                     )}
                   </div>
                   <div className="flex flex-col gap-3">
@@ -624,7 +624,7 @@ const CVBuilder = () => {
                 </div>
               ))}
               <button onClick={() => addItem(setProjects, { name: "", description: "", techStack: "", link: "" })}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-white/30 hover:text-white/60 hover:border-white/15 transition-all mb-4">
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-500 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all mb-4">
                 + Add Project
               </button>
 
@@ -633,7 +633,7 @@ const CVBuilder = () => {
                   <div className="flex items-center justify-between mb-4">
                     <p className={sectionTitle}>🤲 Volunteer Experience {i + 1}</p>
                     {volunteer.length > 1 && (
-                      <button onClick={() => removeItem(setVolunteer, i)} className="text-xs text-red-400/40 hover:text-red-400 transition-colors">Remove</button>
+                      <button onClick={() => removeItem(setVolunteer, i)} className="text-xs text-red-400 hover:text-red-600 transition-colors">Remove</button>
                     )}
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -658,7 +658,7 @@ const CVBuilder = () => {
                 </div>
               ))}
               <button onClick={() => addItem(setVolunteer, { organization: "", role: "", duration: "", description: "" })}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-white/30 hover:text-white/60 hover:border-white/15 transition-all mb-4">
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-500 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all mb-4">
                 + Add Volunteer Experience
               </button>
 
@@ -667,7 +667,7 @@ const CVBuilder = () => {
                   <div className="flex items-center justify-between mb-4">
                     <p className={sectionTitle}>🏅 Award / Achievement {i + 1}</p>
                     {awards.length > 1 && (
-                      <button onClick={() => removeItem(setAwards, i)} className="text-xs text-red-400/40 hover:text-red-400 transition-colors">Remove</button>
+                      <button onClick={() => removeItem(setAwards, i)} className="text-xs text-red-400 hover:text-red-600 transition-colors">Remove</button>
                     )}
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -686,15 +686,15 @@ const CVBuilder = () => {
                 </div>
               ))}
               <button onClick={() => addItem(setAwards, { title: "", issuer: "", year: "" })}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-white/30 hover:text-white/60 hover:border-white/15 transition-all mb-4">
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-500 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all mb-4">
                 + Add Award
               </button>
 
               <div className="flex gap-3">
-                <button onClick={() => setCurrentStep(3)} className="flex-1 py-3.5 rounded-xl text-sm text-white/30 border border-white/[0.08] hover:text-white/50 hover:border-white/15 transition-all">← Back</button>
-                <button onClick={() => setCurrentStep(5)} className="relative overflow-hidden flex-[2] py-3.5 rounded-xl text-sm font-medium text-black bg-white hover:bg-white/90 transition-all group">
+                <button onClick={() => setCurrentStep(3)} className="flex-1 py-3.5 rounded-xl text-sm text-gray-500 border border-gray-200 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all">← Back</button>
+                <button onClick={() => setCurrentStep(5)} className="relative overflow-hidden flex-[2] py-3.5 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-cyan-600 hover:opacity-90 transition-all shadow-md shadow-purple-200 group">
                   <span className="relative z-10">Next: References →</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </button>
               </div>
             </div>
@@ -708,7 +708,7 @@ const CVBuilder = () => {
                   <div className="flex items-center justify-between mb-4">
                     <p className={sectionTitle}>👔 Reference {i + 1}</p>
                     {references.length > 1 && (
-                      <button onClick={() => removeItem(setReferences, i)} className="text-xs text-red-400/40 hover:text-red-400 transition-colors">Remove</button>
+                      <button onClick={() => removeItem(setReferences, i)} className="text-xs text-red-400 hover:text-red-600 transition-colors">Remove</button>
                     )}
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -729,21 +729,21 @@ const CVBuilder = () => {
                 </div>
               ))}
               <button onClick={() => addItem(setReferences, { name: "", designation: "", organization: "", email: "", phone: "" })}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-white/30 hover:text-white/60 hover:border-white/15 transition-all mb-4">
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-500 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all mb-4">
                 + Add Reference
               </button>
               {generateError && (
-                <div className="bg-red-500/[0.08] border border-red-500/20 rounded-xl px-4 py-3 text-sm text-red-400 mb-3 flex items-start gap-2">
+                <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm text-red-500 mb-3 flex items-start gap-2">
                   <span className="flex-shrink-0">⚠️</span>
                   <span>{generateError}</span>
                 </div>
               )}
               <div className="flex gap-3">
-                <button onClick={() => setCurrentStep(4)} className="flex-1 py-3.5 rounded-xl text-sm text-white/30 border border-white/[0.08] hover:text-white/50 hover:border-white/15 transition-all">← Back</button>
+                <button onClick={() => setCurrentStep(4)} className="flex-1 py-3.5 rounded-xl text-sm text-gray-500 border border-gray-200 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all">← Back</button>
                 <button onClick={generateCV} disabled={loading}
-                  className="relative overflow-hidden flex-[2] py-3.5 rounded-xl text-sm font-medium text-black bg-white hover:bg-white/90 transition-all disabled:opacity-40 group">
+                  className="relative overflow-hidden flex-[2] py-3.5 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-cyan-600 hover:opacity-90 transition-all disabled:opacity-40 shadow-md shadow-purple-200 group">
                   <span className="relative z-10">{loading ? "✨ AI Generating..." : "✨ Generate My CV →"}</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </button>
               </div>
             </div>
@@ -753,27 +753,27 @@ const CVBuilder = () => {
           {currentStep === 6 && generatedCV && (
             <div>
               {/* ATS Score Card with visual ring */}
-              <div className="bg-white/[0.03] border border-white/[0.07] rounded-2xl p-5 sm:p-6 mb-4 no-print">
+              <div className="bg-white border border-gray-200 rounded-2xl p-5 sm:p-6 mb-4 no-print shadow-sm">
                 <div className="flex items-center gap-5">
                   <div className="relative w-[72px] h-[72px] flex-shrink-0">
                     <svg width="72" height="72" viewBox="0 0 72 72" className="-rotate-90">
-                      <circle cx="36" cy="36" r="30" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="6" />
+                      <circle cx="36" cy="36" r="30" fill="none" stroke="rgba(0,0,0,0.06)" strokeWidth="6" />
                       <circle
                         cx="36" cy="36" r="30" fill="none"
-                        stroke={generatedCV.atsScore >= 80 ? "#4ade80" : generatedCV.atsScore >= 60 ? "#facc15" : "#f87171"}
+                        stroke={generatedCV.atsScore >= 80 ? "#16a34a" : generatedCV.atsScore >= 60 ? "#ca8a04" : "#dc2626"}
                         strokeWidth="6"
                         strokeDasharray={`${generatedCV.atsScore * 1.884} 188.4`}
                         strokeLinecap="round"
-                        style={{ filter: `drop-shadow(0 0 6px ${generatedCV.atsScore >= 80 ? "#4ade8066" : generatedCV.atsScore >= 60 ? "#facc1566" : "#f8717166"})` }}
+                        style={{ filter: `drop-shadow(0 0 6px ${generatedCV.atsScore >= 80 ? "#16a34a44" : generatedCV.atsScore >= 60 ? "#ca8a0444" : "#dc262644"})` }}
                       />
                     </svg>
-                    <div className="absolute inset-0 flex items-center justify-center text-base font-semibold text-white" style={{ fontFamily: "'Syne', sans-serif" }}>
+                    <div className="absolute inset-0 flex items-center justify-center text-base font-semibold text-gray-900" style={{ fontFamily: "'Syne', sans-serif" }}>
                       {generatedCV.atsScore}%
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-white/70 mb-1">ATS Compatibility Score</p>
-                    <p className="text-xs text-white/25 mb-2">
+                    <p className="text-sm font-medium text-gray-800 mb-1">ATS Compatibility Score</p>
+                    <p className="text-xs text-gray-400 mb-2">
                       {generatedCV.atsScore >= 80
                         ? "🟢 Excellent — your CV will pass most ATS filters"
                         : generatedCV.atsScore >= 60
@@ -782,7 +782,7 @@ const CVBuilder = () => {
                     </p>
                     <div className="flex flex-col gap-1">
                       {generatedCV.atsTips?.map((tip, i) => (
-                        <p key={i} className="text-xs text-yellow-500/50 flex items-start gap-1.5">
+                        <p key={i} className="text-xs text-yellow-600 flex items-start gap-1.5">
                           <span className="flex-shrink-0 mt-0.5">💡</span>{tip}
                         </p>
                       ))}
@@ -792,7 +792,7 @@ const CVBuilder = () => {
               </div>
 
               {/* CV Preview */}
-              <div id="cv-print-area" className="bg-white text-black rounded-2xl p-8 mb-4 print-area">
+              <div id="cv-print-area" className="bg-white text-black rounded-2xl p-8 mb-4 print-area border border-gray-200 shadow-sm">
                 <h1 className="text-[23px] font-bold text-black tracking-tight" style={{letterSpacing: "-0.5px"}}>
                   {generatedCV.personalInfo?.name}
                 </h1>
@@ -1093,17 +1093,17 @@ const CVBuilder = () => {
                   `);
                   win.document.close();
                 }}
-                className="relative overflow-hidden w-full py-3.5 rounded-xl text-sm font-medium text-white bg-white/[0.05] border border-white/[0.09] hover:border-purple-500/30 hover:bg-purple-500/[0.05] transition-all mb-3 no-print"
+                className="relative overflow-hidden w-full py-3.5 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-cyan-600 hover:opacity-90 transition-all mb-3 no-print shadow-md shadow-purple-200"
               >
                 <span className="relative z-10">⬇ Save as PDF</span>
               </button>
 
               <div className="flex gap-3 no-print">
-                <button onClick={() => setCurrentStep(5)} className="flex-1 py-3 rounded-xl text-sm text-white/30 border border-white/[0.08] hover:text-white/50 hover:border-white/15 transition-all">← Edit</button>
+                <button onClick={() => setCurrentStep(5)} className="flex-1 py-3 rounded-xl text-sm text-gray-500 border border-gray-200 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all">← Edit</button>
                 <button onClick={() => { setCurrentStep(0); setGeneratedCV(null); }}
-                  className="relative overflow-hidden flex-1 py-3 rounded-xl text-sm font-medium text-black bg-white hover:bg-white/90 transition-all group">
+                  className="relative overflow-hidden flex-1 py-3 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-cyan-600 hover:opacity-90 transition-all shadow-md shadow-purple-200 group">
                   <span className="relative z-10">Build Another →</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </button>
               </div>
             </div>

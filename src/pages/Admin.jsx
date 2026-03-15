@@ -87,10 +87,10 @@ const Admin = () => {
     new Date(date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 
   const scoreBadge = (score) => {
-    if (!score) return <span className="text-xs text-white/20">—</span>;
-    if (score >= 70) return <span className="text-xs text-green-400 bg-green-500/10 border border-green-500/20 px-2 py-0.5 rounded-full">{score}%</span>;
-    if (score >= 40) return <span className="text-xs text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-2 py-0.5 rounded-full">{score}%</span>;
-    return <span className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-2 py-0.5 rounded-full">{score}%</span>;
+    if (!score) return <span className="text-xs text-gray-300">—</span>;
+    if (score >= 70) return <span className="text-xs text-green-600 bg-green-50 border border-green-200 px-2 py-0.5 rounded-full">{score}%</span>;
+    if (score >= 40) return <span className="text-xs text-yellow-600 bg-yellow-50 border border-yellow-200 px-2 py-0.5 rounded-full">{score}%</span>;
+    return <span className="text-xs text-red-600 bg-red-50 border border-red-200 px-2 py-0.5 rounded-full">{score}%</span>;
   };
 
   const navItems = [
@@ -102,21 +102,21 @@ const Admin = () => {
     { id: "contacts", icon: "📧", label: "Messages", count: stats?.unreadMessages, alert: stats?.unreadMessages > 0 },
   ];
 
-  const thCls = "px-5 py-3 text-left text-[10px] font-medium tracking-[0.8px] uppercase text-white/20 border-b border-white/[0.06] bg-white/[0.02]";
-  const tdCls = "px-5 py-3 text-xs text-white/50 border-b border-white/[0.04]";
+  const thCls = "px-5 py-3 text-left text-[10px] font-semibold tracking-[0.8px] uppercase text-gray-400 border-b border-gray-200 bg-gray-50";
+  const tdCls = "px-5 py-3 text-xs text-gray-600 border-b border-gray-100";
 
   return (
-    <div className="flex min-h-screen bg-[#080808]">
+    <div className="flex min-h-screen bg-gray-50">
 
       {/* ── SIDEBAR ── */}
-      <div className="w-[220px] flex-shrink-0 bg-[#0a0a0a] border-r border-white/[0.07] p-3 flex flex-col gap-1 hidden md:flex">
+      <div className="w-[220px] flex-shrink-0 bg-white border-r border-gray-200 p-3 flex flex-col gap-1 hidden md:flex">
 
         {/* Logo */}
-        <div className="flex items-center gap-2 px-2 pb-5 border-b border-white/[0.06] mb-2">
-          <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center text-sm">🎯</div>
+        <div className="flex items-center gap-2 px-2 pb-5 border-b border-gray-200 mb-2">
+          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-sm">🎯</div>
           <div>
-            <p className="text-sm font-medium text-white/70">CareerCoach</p>
-            <p className="text-[9px] text-white/25 bg-white/[0.06] border border-white/[0.08] px-1.5 py-0.5 rounded w-fit mt-0.5">Admin</p>
+            <p className="text-sm font-medium text-gray-800">CareerCoach</p>
+            <p className="text-[9px] text-purple-600 bg-purple-50 border border-purple-200 px-1.5 py-0.5 rounded w-fit mt-0.5">Admin</p>
           </div>
         </div>
 
@@ -125,12 +125,12 @@ const Admin = () => {
           <button
             key={item.id}
             onClick={() => setActiveTab(item.id)}
-            className={`flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm transition-all text-left ${activeTab === item.id ? "bg-white/[0.07] text-white" : "text-white/30 hover:text-white/60 hover:bg-white/[0.04]"}`}
+            className={`flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm transition-all text-left ${activeTab === item.id ? "bg-purple-50 text-purple-700 border border-purple-200" : "text-gray-500 hover:text-gray-800 hover:bg-gray-100"}`}
           >
             <span className="text-sm">{item.icon}</span>
             <span className="flex-1">{item.label}</span>
             {item.count !== undefined && (
-              <span className={`text-[10px] px-1.5 py-0.5 rounded-lg font-medium ${item.alert ? "bg-red-500/15 text-red-400" : "bg-white/[0.06] text-white/25"}`}>
+              <span className={`text-[10px] px-1.5 py-0.5 rounded-lg font-medium ${item.alert ? "bg-red-100 text-red-600" : "bg-gray-100 text-gray-400"}`}>
                 {item.count}
               </span>
             )}
@@ -142,17 +142,17 @@ const Admin = () => {
       <div className="flex-1 overflow-auto">
 
         {/* Topbar */}
-        <div className="px-6 py-4 border-b border-white/[0.06] flex items-center justify-between">
+        <div className="px-6 py-4 border-b border-gray-200 bg-white flex items-center justify-between">
           <div>
-            <p className="text-sm font-medium text-white capitalize">{activeTab}</p>
-            <p className="text-xs text-white/25 mt-0.5">Welcome back, {user?.name}</p>
+            <p className="text-sm font-medium text-gray-900 capitalize">{activeTab}</p>
+            <p className="text-xs text-gray-400 mt-0.5">Welcome back, {user?.name}</p>
           </div>
 
           {/* Mobile tabs */}
           <div className="flex gap-2 md:hidden overflow-x-auto">
             {navItems.map((item) => (
               <button key={item.id} onClick={() => setActiveTab(item.id)}
-                className={`flex-shrink-0 px-3 py-1.5 rounded-lg text-xs transition-all ${activeTab === item.id ? "bg-white/[0.07] text-white" : "text-white/30"}`}>
+                className={`flex-shrink-0 px-3 py-1.5 rounded-lg text-xs transition-all ${activeTab === item.id ? "bg-purple-50 text-purple-700 border border-purple-200" : "text-gray-400"}`}>
                 {item.icon}
               </button>
             ))}
@@ -163,7 +163,7 @@ const Admin = () => {
 
           {loading && (
             <div className="flex items-center justify-center py-20">
-              <div className="w-6 h-6 border-2 border-white/10 border-t-white/40 rounded-full animate-spin" />
+              <div className="w-6 h-6 border-2 border-gray-200 border-t-purple-500 rounded-full animate-spin" />
             </div>
           )}
 
@@ -181,18 +181,18 @@ const Admin = () => {
                       { label: "CVs Built", value: stats.totalCVs },
                       { label: "Unread Msgs", value: stats.unreadMessages, alert: stats.unreadMessages > 0 },
                     ].map((stat, i) => (
-                      <div key={i} className="bg-[#0f0f0f] border border-white/[0.07] rounded-xl p-4">
-                        <p className="text-[11px] text-white/25 mb-2">{stat.label}</p>
-                        <p className={`text-2xl font-medium ${stat.alert ? "text-red-400" : "text-white"}`}>
+                      <div key={i} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                        <p className="text-[11px] text-gray-400 mb-2">{stat.label}</p>
+                        <p className={`text-2xl font-medium ${stat.alert ? "text-red-500" : "text-gray-900"}`}>
                           {stat.value}
                         </p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="bg-[#0f0f0f] border border-white/[0.07] rounded-xl p-5">
-                    <p className="text-sm font-medium text-white/60 mb-1">Quick Actions</p>
-                    <p className="text-xs text-white/25 mb-4">Common admin tasks</p>
+                  <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                    <p className="text-sm font-medium text-gray-700 mb-1">Quick Actions</p>
+                    <p className="text-xs text-gray-400 mb-4">Common admin tasks</p>
                     <div className="flex flex-wrap gap-2">
                       {[
                         { label: "View Users", tab: "users" },
@@ -200,7 +200,7 @@ const Admin = () => {
                         { label: "View Messages", tab: "contacts" },
                       ].map((action, i) => (
                         <button key={i} onClick={() => setActiveTab(action.tab)}
-                          className="px-4 py-2 rounded-lg text-xs text-white/40 border border-white/[0.08] hover:text-white/60 hover:border-white/15 transition-all">
+                          className="px-4 py-2 rounded-lg text-xs text-gray-500 border border-gray-200 hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all">
                           {action.label} →
                         </button>
                       ))}
@@ -211,10 +211,10 @@ const Admin = () => {
 
               {/* ── USERS ── */}
               {activeTab === "users" && (
-                <div className="bg-[#0f0f0f] border border-white/[0.07] rounded-xl overflow-hidden">
-                  <div className="px-5 py-4 border-b border-white/[0.06] flex items-center justify-between">
-                    <p className="text-sm font-medium text-white/60">All Users</p>
-                    <p className="text-xs text-white/25">{users.length} total</p>
+                <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                  <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <p className="text-sm font-medium text-gray-700">All Users</p>
+                    <p className="text-xs text-gray-400">{users.length} total</p>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full">
@@ -229,11 +229,11 @@ const Admin = () => {
                       </thead>
                       <tbody>
                         {users.map((u) => (
-                          <tr key={u._id} className="hover:bg-white/[0.02] transition-colors">
-                            <td className={`${tdCls} text-white/70 font-medium`}>{u.name}</td>
+                          <tr key={u._id} className="hover:bg-gray-50 transition-colors">
+                            <td className={`${tdCls} text-gray-900 font-medium`}>{u.name}</td>
                             <td className={tdCls}>{u.email}</td>
                             <td className={tdCls}>
-                              <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${u.role === "admin" ? "bg-green-500/10 text-green-400 border-green-500/20" : "bg-white/[0.06] text-white/30 border-white/[0.08]"}`}>
+                              <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${u.role === "admin" ? "bg-green-50 text-green-600 border-green-200" : "bg-gray-100 text-gray-500 border-gray-200"}`}>
                                 {u.role}
                               </span>
                             </td>
@@ -242,13 +242,13 @@ const Admin = () => {
                               <div className="flex gap-2">
                                 <button
                                   onClick={() => changeRole(u._id, u.role === "admin" ? "user" : "admin")}
-                                  className="text-[11px] text-white/25 border border-white/[0.08] px-2.5 py-1 rounded-lg hover:text-white/60 hover:border-white/20 transition-all"
+                                  className="text-[11px] text-gray-500 border border-gray-200 px-2.5 py-1 rounded-lg hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all"
                                 >
                                   {u.role === "admin" ? "Remove Admin" : "Make Admin"}
                                 </button>
                                 <button
                                   onClick={() => deleteUser(u._id)}
-                                  className="text-[11px] text-white/25 border border-white/[0.08] px-2.5 py-1 rounded-lg hover:text-red-400 hover:border-red-500/30 transition-all"
+                                  className="text-[11px] text-gray-500 border border-gray-200 px-2.5 py-1 rounded-lg hover:text-red-600 hover:border-red-300 hover:bg-red-50 transition-all"
                                 >
                                   Delete
                                 </button>
@@ -264,10 +264,10 @@ const Admin = () => {
 
               {/* ── ANALYSES ── */}
               {activeTab === "analyses" && (
-                <div className="bg-[#0f0f0f] border border-white/[0.07] rounded-xl overflow-hidden">
-                  <div className="px-5 py-4 border-b border-white/[0.06] flex items-center justify-between">
-                    <p className="text-sm font-medium text-white/60">All Analyses</p>
-                    <p className="text-xs text-white/25">{analyses.length} total</p>
+                <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                  <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <p className="text-sm font-medium text-gray-700">All Analyses</p>
+                    <p className="text-xs text-gray-400">{analyses.length} total</p>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full">
@@ -281,8 +281,8 @@ const Admin = () => {
                       </thead>
                       <tbody>
                         {analyses.map((a) => (
-                          <tr key={a._id} className="hover:bg-white/[0.02] transition-colors">
-                            <td className={`${tdCls} text-white/70 font-medium`}>{a.candidateName}</td>
+                          <tr key={a._id} className="hover:bg-gray-50 transition-colors">
+                            <td className={`${tdCls} text-gray-900 font-medium`}>{a.candidateName}</td>
                             <td className={tdCls}>{a.jobTitle}</td>
                             <td className={tdCls}>{scoreBadge(a.matchScore)}</td>
                             <td className={tdCls}>{formatDate(a.createdAt)}</td>
@@ -296,10 +296,10 @@ const Admin = () => {
 
               {/* ── INTERVIEWS ── */}
               {activeTab === "interviews" && (
-                <div className="bg-[#0f0f0f] border border-white/[0.07] rounded-xl overflow-hidden">
-                  <div className="px-5 py-4 border-b border-white/[0.06] flex items-center justify-between">
-                    <p className="text-sm font-medium text-white/60">All Interviews</p>
-                    <p className="text-xs text-white/25">{interviews.length} total</p>
+                <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                  <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <p className="text-sm font-medium text-gray-700">All Interviews</p>
+                    <p className="text-xs text-gray-400">{interviews.length} total</p>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full">
@@ -314,12 +314,12 @@ const Admin = () => {
                       </thead>
                       <tbody>
                         {interviews.map((iv) => (
-                          <tr key={iv._id} className="hover:bg-white/[0.02] transition-colors">
-                            <td className={`${tdCls} text-white/70 font-medium`}>{iv.candidateName}</td>
+                          <tr key={iv._id} className="hover:bg-gray-50 transition-colors">
+                            <td className={`${tdCls} text-gray-900 font-medium`}>{iv.candidateName}</td>
                             <td className={tdCls}>{iv.jobTitle}</td>
                             <td className={tdCls}>{scoreBadge(iv.finalScore)}</td>
                             <td className={tdCls}>
-                              <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${iv.status === "completed" ? "bg-green-500/10 text-green-400 border-green-500/20" : "bg-yellow-500/10 text-yellow-400 border-yellow-500/20"}`}>
+                              <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${iv.status === "completed" ? "bg-green-50 text-green-600 border-green-200" : "bg-yellow-50 text-yellow-600 border-yellow-200"}`}>
                                 {iv.status}
                               </span>
                             </td>
@@ -334,10 +334,10 @@ const Admin = () => {
 
               {/* ── CVS ── */}
               {activeTab === "cvs" && (
-                <div className="bg-[#0f0f0f] border border-white/[0.07] rounded-xl overflow-hidden">
-                  <div className="px-5 py-4 border-b border-white/[0.06] flex items-center justify-between">
-                    <p className="text-sm font-medium text-white/60">All CVs</p>
-                    <p className="text-xs text-white/25">{cvs.length} total</p>
+                <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                  <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <p className="text-sm font-medium text-gray-700">All CVs</p>
+                    <p className="text-xs text-gray-400">{cvs.length} total</p>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full">
@@ -351,8 +351,8 @@ const Admin = () => {
                       </thead>
                       <tbody>
                         {cvs.map((cv) => (
-                          <tr key={cv._id} className="hover:bg-white/[0.02] transition-colors">
-                            <td className={`${tdCls} text-white/70 font-medium`}>{cv.personalInfo?.name}</td>
+                          <tr key={cv._id} className="hover:bg-gray-50 transition-colors">
+                            <td className={`${tdCls} text-gray-900 font-medium`}>{cv.personalInfo?.name}</td>
                             <td className={tdCls}>{cv.personalInfo?.linkedin || "—"}</td>
                             <td className={tdCls}>{scoreBadge(cv.atsScore)}</td>
                             <td className={tdCls}>{formatDate(cv.createdAt)}</td>
@@ -366,10 +366,10 @@ const Admin = () => {
 
               {/* ── CONTACTS ── */}
               {activeTab === "contacts" && (
-                <div className="bg-[#0f0f0f] border border-white/[0.07] rounded-xl overflow-hidden">
-                  <div className="px-5 py-4 border-b border-white/[0.06] flex items-center justify-between">
-                    <p className="text-sm font-medium text-white/60">All Messages</p>
-                    <p className="text-xs text-white/25">{contacts.filter(c => c.status === "unread").length} unread</p>
+                <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                  <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <p className="text-sm font-medium text-gray-700">All Messages</p>
+                    <p className="text-xs text-gray-400">{contacts.filter(c => c.status === "unread").length} unread</p>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full">
@@ -386,13 +386,13 @@ const Admin = () => {
                       </thead>
                       <tbody>
                         {contacts.map((c) => (
-                          <tr key={c._id} className="hover:bg-white/[0.02] transition-colors">
-                            <td className={`${tdCls} text-white/70 font-medium`}>{c.name}</td>
+                          <tr key={c._id} className="hover:bg-gray-50 transition-colors">
+                            <td className={`${tdCls} text-gray-900 font-medium`}>{c.name}</td>
                             <td className={tdCls}>{c.email}</td>
                             <td className={tdCls}>{c.subject}</td>
                             <td className={`${tdCls} max-w-[200px] truncate`}>{c.message}</td>
                             <td className={tdCls}>
-                              <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${c.status === "unread" ? "bg-red-500/10 text-red-400 border-red-500/20" : "bg-white/[0.06] text-white/30 border-white/[0.08]"}`}>
+                              <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${c.status === "unread" ? "bg-red-50 text-red-600 border-red-200" : "bg-gray-100 text-gray-400 border-gray-200"}`}>
                                 {c.status}
                               </span>
                             </td>
@@ -401,7 +401,7 @@ const Admin = () => {
                               {c.status === "unread" && (
                                 <button
                                   onClick={() => markRead(c._id)}
-                                  className="text-[11px] text-white/25 border border-white/[0.08] px-2.5 py-1 rounded-lg hover:text-white/60 hover:border-white/20 transition-all"
+                                  className="text-[11px] text-gray-500 border border-gray-200 px-2.5 py-1 rounded-lg hover:text-purple-600 hover:border-purple-300 hover:bg-purple-50 transition-all"
                                 >
                                   Mark Read
                                 </button>

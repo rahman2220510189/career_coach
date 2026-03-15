@@ -29,7 +29,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#06060d] border-t border-purple-500/15">
+    <footer className="bg-white border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-6 pt-6 pb-6">
 
         {/* Top Section */}
@@ -41,8 +41,8 @@ const Footer = () => {
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-sm">
                 🎯
               </div>
-              <span className="text-base font-medium text-gray-100">
-                Career<span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Coach</span>
+              <span className="text-base font-medium text-gray-900">
+                Career<span className="bg-gradient-to-r from-purple-600 to-cyan-600 bg-clip-text text-transparent">Coach</span>
               </span>
             </Link>
 
@@ -51,7 +51,7 @@ const Footer = () => {
             </p>
 
             {/* Status */}
-            <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/3 border border-white/6 text-xs text-gray-500">
+            <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-200 text-xs text-gray-600">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.6)]"></span>
               All systems operational
             </div>
@@ -60,7 +60,7 @@ const Footer = () => {
           {/* Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="text-[11px] font-medium tracking-widest uppercase text-gray-600 mb-4">
+              <h4 className="text-[11px] font-semibold tracking-widest uppercase text-gray-400 mb-4">
                 {category}
               </h4>
               <ul className="space-y-2.5">
@@ -68,7 +68,7 @@ const Footer = () => {
                   <li key={link.name}>
                     <Link
                       to={link.path}
-                      className="text-sm text-gray-500 hover:text-purple-400 transition-colors duration-200"
+                      className="text-sm text-gray-700 hover:text-purple-600 transition-colors duration-200"
                     >
                       {link.name}
                     </Link>
@@ -80,11 +80,11 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-white/6 mb-5" />
+        <div className="border-t border-gray-200 mb-5" />
 
         {/* Bottom Section */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-600">
+          <p className="text-xs text-gray-500">
             © 2026 CareerCoach. Made with{" "}
             <span className="text-purple-500">♥</span>{" "}
             for job seekers.
@@ -98,7 +98,7 @@ const Footer = () => {
                 href={social.url}
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-white/4 border border-white/8 flex items-center justify-center text-xs text-gray-500 hover:bg-purple-500/15 hover:border-purple-500/30 hover:text-purple-400 transition-all duration-200"
+                className="w-8 h-8 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-xs text-gray-600 hover:bg-purple-100 hover:border-purple-300 hover:text-purple-600 transition-all duration-200"
               >
                 {social.name}
               </a>

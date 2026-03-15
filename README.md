@@ -9,7 +9,7 @@
 
 **The AI-powered career mentor that analyzes your CV, finds skill gaps, conducts mock interviews, and builds ATS-friendly CVs — completely free.**
 
-[🌐 Live Demo](https://careercoach-one.vercel.app) · [📹 Demo Video](https://drive.google.com/file/d/1WiuW_TjeFPRltJBahFV5ypGXcFcs2lba/view?usp=drive_link) · [⚙️ Backend Repo](https://github.com/rahman2220510189/career-coach-backend)
+[🌐 Live Demo](https://careercoach-one.vercel.app) · [📹 Demo Video](https://drive.google.com/file/d/1LwdI9IZ2dAzteOhqkvgQfUxRVXHhMstv/view?usp=drive_link) · [⚙️ Backend Repo](https://github.com/rahman2220510189/career-coach-backend)
 
 </div>
 

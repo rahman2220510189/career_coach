@@ -29,29 +29,29 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050508] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
 
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-2xl bg-black border border-white/10 flex items-center justify-center text-2xl mx-auto mb-4">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-2xl mx-auto mb-4 shadow-lg shadow-purple-200">
             🎯
           </div>
-          <h1 className="text-2xl font-medium text-white tracking-tight">
+          <h1 className="text-2xl font-medium text-gray-900 tracking-tight">
             Welcome back
           </h1>
-          <p className="text-white/30 text-sm mt-2">
+          <p className="text-gray-400 text-sm mt-2">
             Log in to your CareerCoach account
           </p>
         </div>
 
         {/* Form */}
-        <div className="bg-white/3 border border-white/8 rounded-2xl p-8">
+        <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
             {/* Email */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm text-white/40">Email</label>
+              <label className="text-sm text-gray-600">Email</label>
               <input
                 type="email"
                 name="email"
@@ -59,17 +59,17 @@ const Login = () => {
                 onChange={handleChange}
                 placeholder="enter your email"
                 required
-                className="bg-white/5 border border-white/8 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-white/20 transition-all"
+                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:border-purple-400 focus:bg-purple-50 transition-all"
               />
             </div>
 
             {/* Password */}
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-sm text-white/40">Password</label>
+                <label className="text-sm text-gray-600">Password</label>
                 <Link
                   to="/forgot-password"
-                  className="text-xs text-white/25 hover:text-white/50 transition-colors"
+                  className="text-xs text-gray-400 hover:text-purple-600 transition-colors"
                 >
                   Forgot password?
                 </Link>
@@ -81,13 +81,13 @@ const Login = () => {
                 onChange={handleChange}
                 placeholder="enter your password"
                 required
-                className="bg-white/5 border border-white/8 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-white/20 transition-all"
+                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:border-purple-400 focus:bg-purple-50 transition-all"
               />
             </div>
 
             {/* Error */}
             {error && (
-              <div className="bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 text-sm text-red-400">
+              <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm text-red-500">
                 {error}
               </div>
             )}
@@ -96,7 +96,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="mt-2 py-3 rounded-xl text-sm font-medium text-black bg-white hover:bg-white/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="mt-2 py-3 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-cyan-600 hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md shadow-purple-200"
             >
               {loading ? "Logging in..." : "Log in →"}
             </button>
@@ -105,9 +105,9 @@ const Login = () => {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-sm text-white/20 mt-6">
+        <p className="text-center text-sm text-gray-400 mt-6">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-white/50 hover:text-white transition-colors">
+          <Link to="/signup" className="text-purple-600 hover:text-purple-700 transition-colors font-medium">
             Sign up
           </Link>
         </p>
