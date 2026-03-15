@@ -10,6 +10,8 @@ import Admin from "../pages/Admin";
 import { useAuth } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
 import CVBuilder from "../pages/CVBuilder";
+import ForgotPassword from "../pages/ForgotPassword";
+import ResetPassword from "../pages/ResetPassword";
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
@@ -30,6 +32,9 @@ export const router = createBrowserRouter([
       { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
+      { path: "/forgot-password", element: <ForgotPassword /> },
+       { path: "/reset-password", element: <ResetPassword /> },
+      
       {
         path: "/dashboard",
         element: (

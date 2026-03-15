@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -19,7 +18,6 @@ const Login = () => {
     e.preventDefault();
     setError("");
     setLoading(true);
-
     try {
       const res = await instance.post("/auth/login", formData);
       login(res.data.token, res.data.user);
@@ -27,7 +25,6 @@ const Login = () => {
     } catch (err) {
       setError(err.response?.data?.error || "Something went wrong ❌");
     }
-
     setLoading(false);
   };
 
@@ -68,7 +65,15 @@ const Login = () => {
 
             {/* Password */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm text-white/40">Password</label>
+              <div className="flex items-center justify-between">
+                <label className="text-sm text-white/40">Password</label>
+                <Link
+                  to="/forgot-password"
+                  className="text-xs text-white/25 hover:text-white/50 transition-colors"
+                >
+                  Forgot password?
+                </Link>
+              </div>
               <input
                 type="password"
                 name="password"
