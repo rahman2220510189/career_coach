@@ -841,7 +841,7 @@ const CVBuilder = () => {
                       <div key={i} className="mb-2">
                         <div className="flex justify-between">
                           <p className="text-[13px] font-bold text-black">
-                            {edu.degree}{edu.department ? ` in ${edu.department}` : ""}
+                            {edu.degree}{edu.department && !edu.degree.toLowerCase().includes(edu.department.toLowerCase()) ? ` in ${edu.department}` : ""}
                           </p>
                           <p className="text-[11px] text-gray-500 font-medium">{edu.year}</p>
                         </div>
